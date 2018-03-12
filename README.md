@@ -15,11 +15,9 @@ Syntax: 	ODDS(X,ALPHA)
     Inputs:
           X - 2x2 data matrix composed like this:<br/>
 .............................................Cases...Controls<br/>
-                                             ___________<br/>
+                                             
 Treated (or exposed to risk factor)          |  A  |  B  |<br/>
-                                            |_____|_____|<br/>
 Placebo (or not exposed to risk factors )    |  C  |  D  |<br/>
-                                            |_____|_____|<br/>
                                                
           ALPHA - Significance level (default=0.05).
 
@@ -34,11 +32,9 @@ Placebo (or not exposed to risk factors )    |  C  |  D  |<br/>
 
      Example: 
 ..............................Cancer..Controls<br/>
-                               ___________<br/>
 Passive smoke exposed         |  25 |  21 |<br/>
-                              |_____|_____|<br/>
 Passive smoke not exposed     |  7  |  27 |<br/>
-                              |_____|_____|<br/>
+
 
 Data matrix must be x=[25 21; 7 27];
 
