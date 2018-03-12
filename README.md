@@ -1,5 +1,5 @@
 # odds
-This function calculates the Risk Ratio and the Odds Ratio (OR) on a 2x2
+This function calculates the Risk Ratio (RR) and the Odds Ratio (OR) on a 2x2
 input matrix. Both ratios are computed with confidence intervals. If
 confidence interval of OR doesn't encompass the value OR=1, then the
 function computes the Bayesian Credibility Assessment of the test. If the
