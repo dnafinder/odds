@@ -72,12 +72,11 @@ function odds(x,varargin)
 
 %Input error handling
 p = inputParser;
-validationX = @(x) all(isnumeric(x(:))) && all(isreal(x(:))) && all(isfinite(x(:))) && isequal(size(x),[2 2]) && all(fix(x(:))==x(:)) && all(x(:)>0);
-addRequired(p,'x',validationX);
-addOptional(p,'alpha',0.05, @(x) isnumeric(x) && isreal(x) && isfinite(x) && isscalar(x) && (x>0 || x<1));
+addRequired(p,'x',@(x) validateattributes(x,{'numeric'},{'real','finite','integer','positive','nonnan','size',[2 2]}));
+addOptional(p,'alpha',0.05, @(x) validateattributes(x,{'numeric'},{'scalar','real','finite','nonnan','>',0,'<',1}));
 parse(p,x,varargin{:});
 x=p.Results.x; alpha=p.Results.alpha;
-clear p default* validation*
+clear p
 
 fprintf('Significance level: %d%%\n', (1-alpha)*100)
 disp(' ')
