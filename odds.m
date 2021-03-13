@@ -72,11 +72,12 @@ function odds(x,varargin)
 
 %Input error handling
 p = inputParser;
-addRequired(p,'x',@(x) validateattributes(x,{'numeric'},{'real','finite','integer','positive','nonnan','size',[2 2]}));
+addRequired(p,'x',@(x) validateattributes(x,{'numeric'},{'real','finite','integer','nonnan','size',[2 2]}));
 addOptional(p,'alpha',0.05, @(x) validateattributes(x,{'numeric'},{'scalar','real','finite','nonnan','>',0,'<',1}));
 parse(p,x,varargin{:});
 x=p.Results.x; alpha=p.Results.alpha;
 clear p
+x(x==0)=0.5;
 
 fprintf('Significance level: %d%%\n', (1-alpha)*100)
 disp(' ')
@@ -106,18 +107,22 @@ fprintf('Odds Ratio: %0.4f<%0.4f<%0.4f\n',orci(1),or,orci(2))
 if(orci(1)<=1 && orci(2)>=1)
    disp('Confidence interval encompasses OR=1. None significative association.')
 else
-    Phi=(det(x)-sum(x(:))/2)/realsqrt(prod(sum(x))*prod(sum(x,2)));
-    fprintf('Phi: %0.4f\n',Phi)
+    N=sum(x(:));
+    Phi=(det(x)-N/2)/realsqrt(prod(sum(x))*prod(sum(x,2)));
+    phi_hat=max(0,Phi^2-1/(N-1));
+    k_hat=2-1/(N-1);
+    V=sqrt(phi_hat/(k_hat-1));
+    fprintf('Cramer''s V: %0.4f\n',V)
     switch sign(Phi)
         case -1
             txt2='negative association (protective factor)';
         case 1
             txt2='positive association (risk factor)';
     end
-    Phi=abs(Phi);
-    if Phi<=0.3
+    V=abs(V);
+    if V<=0.3
         txt1='Weak ';
-    elseif (Phi>0.3 && Phi<=0.7)
+    elseif (V>0.3 && V<=0.7)
         txt1='Moderate ';
     else
         txt1='Strong ';
