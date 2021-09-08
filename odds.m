@@ -82,21 +82,22 @@ x(x==0)=0.5;
 fprintf('Significance level: %d%%\n', (1-alpha)*100)
 disp(' ')
 Za=-realsqrt(2)*erfcinv(2-alpha);
-R=sum(x,2); %sum of the rows
-p=x(:,1)./R; 
+R=sum(x); %sum of the columns
+p=x(1,:)./R; 
 
-%risk ratio (RR)
 rr=p(1)/p(2); 
-rrse=realsqrt(sum(1./x(:,1)-1./R)); %standard error of log(RR)
+rrse=realsqrt(sum(1./x(1,:)-1./R)); %standard error of log(RR)
 rrci=exp(reallog(rr)+([-1 1].*(Za*rrse))); %RR confidence interval
 d=abs(diff(p)); %absolute risk reduction
-rrr=d/p(1); %relative risk reduction
+rrr=d/p(2); %relative risk reduction
 fprintf('Risk Ratio: %0.4f<%0.4f<%0.4f\n',rrci(1),rr,rrci(2))
 if(rrci(1)<=1 && rrci(2)>=1)
    disp('Confidence interval encompasses RR=1. None significative association.')
 end
 fprintf('Absolute risk reduction: %0.1f%%\n',d*100)
 fprintf('Relative risk reduction: %0.1f%%\n',rrr*100)
+fprintf('Number Needed to Treat (NNT): %0.2f\n',1/d);
+fprintf('Around %i patients need to be tested to correctly detect 100 positive tests for the presence of disease\n',ceil(100/d)) 
 disp(' ')
 
 %odd ratio (OR)
