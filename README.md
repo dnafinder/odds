@@ -33,12 +33,12 @@ With structured output:
 
 Typical 2×2 layout:
 
-           Cases      Controls
-         +---------+-----------+
-Exposed  |    A    |     B     |
-         +---------+-----------+
-Unexposed|    C    |     D     |
-         +---------+-----------+
+              Cases        Controls
+            +-----------+-----------+
+Exposed     |     A     |     B     |
+            +-----------+-----------+
+Unexposed   |     C     |     D     |
+            +-----------+-----------+
 
 Example matrix:
    x = [A B;
