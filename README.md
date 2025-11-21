@@ -32,13 +32,17 @@ With structured output:
    stats = odds(x);
 
 Typical 2×2 layout:
-   %                    Cases        Controls
-   %                  ________________________
-   %   Exposed       |   A   |   B           |
-   %                 |_______|_______________|
-   %   Unexposed     |   C   |   D           |
-   %                 |_______|_______________|
-   x = [A B; C D];
+
+           Cases      Controls
+         +---------+-----------+
+Exposed  |    A    |     B     |
+         +---------+-----------+
+Unexposed|    C    |     D     |
+         +---------+-----------+
+
+Example matrix:
+   x = [A B;
+        C D];
 
 🔣 Inputs
 X:
