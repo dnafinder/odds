@@ -1,44 +1,55 @@
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=dnafinder/odds)
 
 🌐 Overview
-odds.m computes risk ratio (RR), odds ratio (OR) and a rich set of related measures for a 2×2 contingency table. It is designed for classical binary outcome studies (treated vs control, exposed vs unexposed) and produces both a human-readable summary and an optional structured output for further analysis.
+This repository contains the MATLAB function `odds.m`, which computes the Risk Ratio (RR), Odds Ratio (OR), confidence intervals, Bayesian credibility assessment, association strength (Cramer's V), and statistical power for a 2×2 contingency table.
 
 ⭐ Features
-• Risk Ratio (RR) with confidence interval  
-• Absolute and Relative Risk Reduction (ARR, RRR)  
-• Number Needed to Treat (NNT), when applicable  
-• Odds Ratio (OR) with confidence interval  
-• Association measures (Phi and Cramer’s V) with qualitative interpretation  
-• Bayesian Credibility Assessment and Critical Odds Ratio (COR)  
-• Asymptotic power calculation  
-• Recommended sample sizes to achieve Power ≈ 0.80 (Sahai & Khurshid, 1996)  
-• Optional structured output for programmatic use  
+- Risk Ratio with confidence interval
+- Absolute Risk Reduction (ARR)
+- Relative Risk Reduction (RRR)
+- Number Needed to Treat (NNT)
+- Odds Ratio with confidence interval
+- Bayesian Credibility Assessment (Critical Odds Ratio)
+- Cramer's V and association strength classification
+- Power estimation (asymptotic normal method)
+- Sample-size calculation if power < 0.80
 
 🛠️ Installation
-1. Clone the repository:
-   git clone https://github.com/dnafinder/odds
+1. Download or clone the repository:
+   https://github.com/dnafinder/odds
 2. Add the folder to your MATLAB path:
-   addpath('path_to_odds_folder')
+   addpath('path_to_folder');
 
 ▶️ Usage
-Basic call (prints results only):
-   x = [25 21; 7 27];
-   odds(x);
+Call the function with a 2×2 matrix:
+   odds(x)
+or with an optional alpha level:
+   odds(x, alpha)
 
-With custom significance level (e.g. 99% CI):
-   odds(x, 0.01);
+🔣 Inputs
+- x : 2×2 matrix  
+- alpha : significance level (default = 0.05)
 
-With structured output:
-   stats = odds(x);
+📤 Outputs
+Displayed on screen:
+- RR, ARR, RRR, NNT
+- OR + CI
+- Association strength (Cramer’s V)
+- Bayesian Credibility Assessment
+- Power and required sample sizes (if needed)
 
-Typical 2×2 layout:
+📘 Interpretation
+The function evaluates association between two conditions or exposures.  
+A typical 2×2 structure is:
 
-      Cases        Controls
-    +-----------+-----------+
+```text
+              Cases        Controls
+            +-----------+-----------+
 Exposed     |     A     |     B     |
-    +-----------+-----------+
+            +-----------+-----------+
 Unexposed   |     C     |     D     |
-    +-----------+-----------+
+            +-----------+-----------+
+```
 
 Example matrix:
    x = [A B;
